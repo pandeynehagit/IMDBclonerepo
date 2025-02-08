@@ -9,7 +9,7 @@ const RatingCircle = ({ rating }) => {
       width="50"
       height="50"
       viewBox="0 0 50 50"
-      className="absolute bottom-2 left-2"
+      className="absolute top-2 left-0"
     >
       {/* Background Circle */}
       <circle
@@ -17,7 +17,7 @@ const RatingCircle = ({ rating }) => {
         cy="25"
         r={radius}
         strokeWidth="5"
-        fill="transparent"
+        fill="none"
         stroke="#e0e0e0"
       />
 
@@ -27,10 +27,8 @@ const RatingCircle = ({ rating }) => {
         cy="25"
         r={radius}
         strokeWidth="5"
-        fill="transparent"
-        stroke={
-          percentage >= 70 ? "green" : percentage >= 40 ? "yellow" : "red"
-        }
+        fill="black"
+        stroke={percentage > 0 ? "green" : "red"}
         strokeDasharray={circumference}
         strokeDashoffset={offset}
         strokeLinecap="round"
@@ -44,7 +42,7 @@ const RatingCircle = ({ rating }) => {
         textAnchor="middle"
         dy=".3em"
         fontSize="12"
-        fill="white"
+        fill="red"
         fontWeight="bold"
       >
         {percentage.toFixed(0)}%

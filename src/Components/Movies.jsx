@@ -3,16 +3,23 @@ import MovieCard from "./MovieCard";
 import Pagination from "./Pagination";
 import { MoviesContext } from "../Context/MoviesContext";
 import { WatchListContext } from "../Context/WatchListContext";
+import LoadingSpinner from "../Utils/LoadingSpinner";
 
 const Movies = () => {
-  const { movies, handlePageNext, handlePagePrev, pageno } =
+  const { movies, loadingSpinner, handlePageNext, handlePagePrev, pageno } =
     useContext(MoviesContext);
   const { addtoWatchList, removefromWatchList, isaddedtoWatchList } =
     useContext(WatchListContext);
 
   return (
-    <div>
-      <div className="text-3xl font-bold, m-5 text-center">
+    <div className="relative">
+      {loadingSpinner && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <LoadingSpinner />
+        </div>
+      )}
+
+      <div className="text-3xl font-bold m-5 text-center">
         <h1 className="p-4">Trending Movies</h1>
       </div>
       <div className="flex justify-evenly flex-wrap gap-4">
@@ -35,5 +42,4 @@ const Movies = () => {
     </div>
   );
 };
-
 export default Movies;

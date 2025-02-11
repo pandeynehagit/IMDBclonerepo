@@ -13,6 +13,8 @@ const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 export const MoviesProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [pageno, setPageno] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageRange, setPageRange] = useState([1, 10]);
   const [movieDetails, setMovieDetails] = useState(null);
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
@@ -29,6 +31,7 @@ export const MoviesProvider = ({ children }) => {
         );
 
         setMovies(response.data.results);
+        setTotalPages(response.data.total_pages);
       } catch (error) {
         console.error("Error fetching data", error);
       } finally {
@@ -61,11 +64,18 @@ export const MoviesProvider = ({ children }) => {
   };
 
   const handlePageNext = () => {
-    setPageno((prev) => (prev < 20 ? prev + 1 : 1));
+    if (pageno < totalPages) {
+      setPageno((prev) => prev + 1);
+    }
   };
 
   const handlePagePrev = () => {
-    setPageno((prev) => (prev > 1 ? prev - 1 : prev));
+    if (pageno > 1) {
+      setPageno((prev) => prev - 1);
+    }
+  };
+  const updatePageRange = (newRange) => {
+    setPageRange(newRange);
   };
 
   return (
@@ -78,6 +88,9 @@ export const MoviesProvider = ({ children }) => {
         pageno,
         handlePageNext,
         handlePagePrev,
+        totalPages,
+        pageRange,
+        updatePageRange,
       }}
     >
       {children}

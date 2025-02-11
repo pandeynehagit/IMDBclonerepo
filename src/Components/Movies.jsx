@@ -6,8 +6,16 @@ import { WatchListContext } from "../Context/WatchListContext";
 import LoadingSpinner from "../Utils/LoadingSpinner";
 
 const Movies = () => {
-  const { movies, loadingSpinner, handlePageNext, handlePagePrev, pageno } =
-    useContext(MoviesContext);
+  const {
+    movies,
+    loadingSpinner,
+    handlePageNext,
+    handlePagePrev,
+    pageno,
+    totalPages,
+    pageRange,
+    updatePageRange,
+  } = useContext(MoviesContext);
   const { addtoWatchList, removefromWatchList, isaddedtoWatchList } =
     useContext(WatchListContext);
 
@@ -38,6 +46,9 @@ const Movies = () => {
         pageno={pageno}
         handlePageNext={handlePageNext}
         handlePagePrev={handlePagePrev}
+        totalPages={totalPages}
+        pageRange={pageRange}
+        updatePageRange={updatePageRange}
       />
     </div>
   );

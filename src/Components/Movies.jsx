@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import MovieCard from "./MovieCard";
-import Pagination from "./Pagination";
+//import Pagination from "./Pagination";
 import { MoviesContext } from "../Context/MoviesContext";
 import { WatchListContext } from "../Context/WatchListContext";
 import LoadingSpinner from "../Utils/LoadingSpinner";
@@ -9,12 +9,14 @@ const Movies = () => {
   const {
     movies,
     loadingSpinner,
-    handlePageNext,
-    handlePagePrev,
-    pageno,
-    totalPages,
-    pageRange,
-    updatePageRange,
+    //handlePageNext,
+    //handlePagePrev,
+    // pageno,
+    // totalPages,
+    //pageRange,
+    //updatePageRange,
+    loadMore,
+    load,
   } = useContext(MoviesContext);
   const { addtoWatchList, removefromWatchList, isaddedtoWatchList } =
     useContext(WatchListContext);
@@ -42,14 +44,23 @@ const Movies = () => {
             />
           ))}
       </div>
-      <Pagination
+      {/* <Pagination
         pageno={pageno}
         handlePageNext={handlePageNext}
         handlePagePrev={handlePagePrev}
         totalPages={totalPages}
         pageRange={pageRange}
         updatePageRange={updatePageRange}
-      />
+      /> */}
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={loadMore}
+          disabled={load}
+          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        >
+          {load ? "Loading..." : "Load More"}
+        </button>
+      </div>
     </div>
   );
 };

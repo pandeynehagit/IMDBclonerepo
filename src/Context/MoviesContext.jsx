@@ -13,13 +13,13 @@ const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 export const MoviesProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [pageno, setPageno] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [pageRange, setPageRange] = useState([1, 10]);
+  // const [totalPages, setTotalPages] = useState(1);
+  // const [pageRange, setPageRange] = useState([1, 10]);
+  const [load, setLoad] = useState(false);
   const [movieDetails, setMovieDetails] = useState(null);
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
-  const [loadingSpinner, setLoadingSpinner] = useState(false); // Fixed 'ture' typo
-
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -30,8 +30,8 @@ export const MoviesProvider = ({ children }) => {
           `https://api.themoviedb.org/3/trending/movie/week?api_key=${VITE_API_KEY}&page=${pageno}`
         );
 
-        setMovies(response.data.results);
-        setTotalPages(response.data.total_pages);
+        setMovies((prev) => [...prev, ...response.data.results]);
+        // setTotalPages(response.data.total_pages);
       } catch (error) {
         console.error("Error fetching data", error);
       } finally {
@@ -63,21 +63,21 @@ export const MoviesProvider = ({ children }) => {
       });
   };
 
-  const handlePageNext = () => {
-    if (pageno < totalPages) {
-      setPageno((prev) => prev + 1);
-    }
-  };
+  // const handlePageNext = () => {
+  //   if (pageno < totalPages) {
+  //     setPageno((prev) => prev + 1);
+  //   }
+  // };
 
-  const handlePagePrev = () => {
-    if (pageno > 1) {
-      setPageno((prev) => prev - 1);
-    }
-  };
-  const updatePageRange = (newRange) => {
-    setPageRange(newRange);
-  };
-
+  // const handlePagePrev = () => {
+  //   if (pageno > 1) {
+  //     setPageno((prev) => prev - 1);
+  //   }
+  // };
+  // const updatePageRange = (newRange) => {
+  //   setPageRange(newRange);
+  // };
+  const loadMore = () => setPageno((prev) => prev + 1);
   return (
     <MoviesContext.Provider
       value={{
@@ -85,12 +85,14 @@ export const MoviesProvider = ({ children }) => {
         movies,
         movieDetails,
         fetchMovieDetails,
-        pageno,
-        handlePageNext,
-        handlePagePrev,
-        totalPages,
-        pageRange,
-        updatePageRange,
+        //pageno,
+        //handlePageNext,
+        //handlePagePrev,
+        //totalPages,
+        //pageRange,
+        //updatePageRange,
+        loadMore,
+        load,
       }}
     >
       {children}

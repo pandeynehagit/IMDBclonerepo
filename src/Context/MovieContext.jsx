@@ -47,7 +47,7 @@ import axios from "axios";
 
 const MovieContext = createContext();
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 import { useDispatch } from "react-redux";
 import {
   hideLoading,
@@ -65,7 +65,7 @@ export const MovieProvider = ({ children }) => {
       try {
         dispatch(showLoading);
         const response = await axios.get(
-          `https://api.themoviedb.org/3/${category}?api_key=${API_KEY}&page=${page}`
+          `https://api.themoviedb.org/3/${category}?api_key=${VITE_API_KEY}&page=${page}`
         );
 
         setMovies((prevMovies) =>

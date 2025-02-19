@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import RatingCircle from "../Utils/RatingCircle";
+
 import LoadingSpinner from "../Utils/LoadingSpinner";
 import { useSelector, useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "./LoaderSlice/loadingSlice";

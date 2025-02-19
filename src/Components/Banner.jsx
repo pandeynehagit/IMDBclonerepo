@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MoviesContext } from "../Context/MoviesContext"; // Adjust the path as needed
+import MovieContext from "../Context/MovieContext";
 
 const Banner = () => {
-  const { movies } = useContext(MoviesContext);
+  const { movies, setCategory } = useContext(MovieContext);
   const [index, setIndex] = useState(0);
   const latestMovies = movies.slice(0, 8);
 
   useEffect(() => {
+    setCategory("trending/movie/week");
+
     if (latestMovies.length > 0) {
       setIndex(0); // Reset index when movies update
     }

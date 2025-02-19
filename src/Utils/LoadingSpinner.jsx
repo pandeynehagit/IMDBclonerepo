@@ -20,7 +20,7 @@ const LoadingSpinner = () => (
         cx="25"
         cy="25"
         r="20"
-        stroke="currentColor"
+        stroke="yellow"
         stroke-width="4"
         fill="none"
         stroke-linecap="round"

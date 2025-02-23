@@ -47,7 +47,7 @@ import axios from "axios";
 
 const MovieContext = createContext();
 
-const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 import { useDispatch } from "react-redux";
 import {
   hideLoading,
@@ -57,7 +57,7 @@ import {
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState("trending/movie/week"); // Default to "trending Movies"
+  const [category, setCategory] = useState("trending/movie/day"); // Default to "trending Movies"
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -65,7 +65,7 @@ export const MovieProvider = ({ children }) => {
       try {
         dispatch(showLoading);
         const response = await axios.get(
-          `https://api.themoviedb.org/3/${category}?api_key=${VITE_API_KEY}&page=${page}`
+          `https://api.themoviedb.org/3/${category}?api_key=${API_KEY}&page=${page}`
         );
 
         setMovies((prevMovies) =>

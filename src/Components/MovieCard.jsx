@@ -39,10 +39,10 @@ const MovieCard = ({
   };
 
   return (
-    <div className="w-[200px] bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 duration-300 hover:cursor-pointer">
+    <div className="w-[200px]  bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 duration-300 hover:cursor-pointer">
       {/* Movie Image */}
       <div
-        className="relative w-full h-[300px] bg-cover bg-center"
+        className="relative w-full h-[300px]  bg-cover bg-center "
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.poster_path})`,
         }}
@@ -94,7 +94,7 @@ const MovieCard = ({
           </div>
         )}
         {/* Rating Circle */}
-        <div className="absolute top-0 left-0 m-2">
+        <div>
           <RatingCircle rating={movie.vote_average} />
         </div>
       </div>

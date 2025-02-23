@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${VITE_API_KEY}&language=en-US&page=1`;
+ import { useContext } from "react";
 
 const UpcomingMovies = () => {
+  
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [trailerKey, setTrailerKey] = useState("");
@@ -12,6 +14,7 @@ const UpcomingMovies = () => {
       try {
         const response = await fetch(API_URL);
         const data = await response.json();
+        
         setMovies(data.results);
         if (data.results.length > 0) {
           setSelectedMovie(data.results[0]); // Default to first movie

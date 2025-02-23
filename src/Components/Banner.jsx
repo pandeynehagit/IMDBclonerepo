@@ -8,7 +8,7 @@ const Banner = () => {
   const latestMovies = movies.slice(0, 8);
 
   useEffect(() => {
-    setCategory("trending/movie/week");
+    setCategory("trending/movie/");
 
     if (latestMovies.length > 0) {
       setIndex(0); // Reset index when movies update

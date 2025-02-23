@@ -12,7 +12,7 @@ const LoadingSpinner = () => (
 //       />
 //     </svg> */}
     <svg
-      class="w-10 h-10 animate-spin"
+      className="w-10 h-10 animate-spin"
       viewBox="0 0 50 50"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -21,11 +21,11 @@ const LoadingSpinner = () => (
         cy="25"
         r="20"
         stroke="yellow"
-        stroke-width="4"
+        strokeWidth="4"
         fill="none"
-        stroke-linecap="round"
-        stroke-dasharray="90 150"
-        stroke-dashoffset="0"
+        strokeLinecap="round"
+        strokeDasharray="90 150"
+        strokeDashoffset="0"
       ></circle>
     </svg>
   </div>

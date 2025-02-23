@@ -9,7 +9,7 @@ const PopularMovies = () => {
   }, []);
 
   return (
-    <div className="bg-gray-800 text-center p-4">
+    <div className=" top-5 bg-gray-800 text-center p-4">
       <h4 className="text-2xl font-bold text-gray-400 mb-4">Popular Movies</h4>
 
       <div className="flex flex-wrap justify-center gap-6">

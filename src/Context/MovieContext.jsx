@@ -57,7 +57,7 @@ import {
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState("trending/movie/day"); // Default to "trending Movies"
+  const [category, setCategory] = useState("trending/movie/day");
 
   const dispatch = useDispatch();
   useEffect(() => {

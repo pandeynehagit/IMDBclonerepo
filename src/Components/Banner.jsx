@@ -18,16 +18,18 @@ const Banner = () => {
   const nextSlide = () => {
     setIndex((prev) => (prev + 1) % latestMovies.length);
   };
-
+  const previousSlide = () => {
+    setIndex((prev) => (prev - 1 + latestMovies.length) % latestMovies.length);
+  };
   const goToSlide = (i) => {
     setIndex(i);
   };
 
   // Auto-slide every 5 seconds
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(nextSlide, 8000);
     return () => clearInterval(timer);
-  }, [nextSlide, latestMovies.length]);
+  }, [nextSlide, previousSlide, latestMovies.length]);
   //error handling
   if (latestMovies.length === 0) {
     return (
@@ -37,23 +39,9 @@ const Banner = () => {
     );
   }
   return (
-    <div className="relative w-full h-[30vh] md:h-[50vh] overflow-hidden">
-      {/* Background Banner (Previous Image Stays) */}
-      {latestMovies.length > 0 && (
-        <div
-          className="absolute w-full h-full bg-cover bg-center border-4 border-white shadow-lg"
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${
-              latestMovies[
-                (index - 1 + latestMovies.length) % latestMovies.length
-              ].backdrop_path
-            })`,
-          }}
-        ></div>
-      )}
-
-      {/* Foreground Banner (Slides Over the Previous One) */}
-      <AnimatePresence mode="wait">
+    <div className="relative bg-gray-800 w-full h-[30vh] md:h-[50vh] overflow-hidden">
+      {/*Banner*/}
+      <AnimatePresence>
         {latestMovies.length > 0 && (
           <motion.div
             key={latestMovies[index].id}
@@ -61,10 +49,13 @@ const Banner = () => {
             style={{
               backgroundImage: `url(https://image.tmdb.org/t/p/original/${latestMovies[index].backdrop_path})`,
             }}
-            initial={{ x: "100%" }} // Start from the right
-            animate={{ x: 0 }} // Slide in fully
-            exit={{ x: 0 }} // Keep in place (so previous stays behind)
-            transition={{ duration: 2.0, ease: "easeInOut" }}
+            initial={{ scale: 1.5, opacity: 0 }} // Start with zoom and opacity 0
+            animate={{ scale: 1, opacity: 1 }} // Zoom out and fully visible
+            exit={{ scale: 1.2, opacity: 0 }} // Zoom back and fade out when leaving
+            transition={{
+              duration: 3.0,
+              ease: "easeInOut",
+            }}
           >
             {/* Movie Title */}
             <div className="absolute bottom-5 left-5 bg-black bg-opacity-50 text-white p-3 rounded-lg text-lg font-bold">
@@ -86,6 +77,22 @@ const Banner = () => {
           ></button>
         ))}
       </div>
+
+      {/* Left Arrow */}
+      <button
+        onClick={previousSlide}
+        className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full"
+      >
+        <i className="fa fa-arrow-left"></i>
+      </button>
+
+      {/* Right Arrow */}
+      <button
+        onClick={nextSlide}
+        className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full"
+      >
+        <i className="fa fa-arrow-right"></i>
+      </button>
     </div>
   );
 };

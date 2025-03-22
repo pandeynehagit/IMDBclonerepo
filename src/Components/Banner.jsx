@@ -48,10 +48,11 @@ const Banner = () => {
             className="absolute w-full h-full bg-cover bg-center border-4 border-white shadow-lg"
             style={{
               backgroundImage: `url(https://image.tmdb.org/t/p/original/${latestMovies[index].backdrop_path})`,
+              backgroundPosition: "center top",
             }}
-            initial={{ scale: 1.5, opacity: 0 }} // Start with zoom and opacity 0
-            animate={{ scale: 1, opacity: 1 }} // Zoom out and fully visible
-            exit={{ scale: 1.2, opacity: 0 }} // Zoom back and fade out when leaving
+            initial={{ x: 30, opacity: 0, duration: 2.0 }} // Start with zoom and opacity 0
+            animate={{ x: 0, opacity: 1 }} // Zoom out and fully visible
+            exit={{ x: -30, opacity: 0 }} // Zoom back and fade out when leaving
             transition={{
               duration: 3.0,
               ease: "easeInOut",

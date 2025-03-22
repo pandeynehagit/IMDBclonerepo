@@ -205,12 +205,12 @@ const WatchList = () => {
   return (
     <>
       {/* Filters Row */}
-      <div className="flex justify-between items-center p-4 bg-gray-800 text-white">
+      <div className="flex flex-col md:flex-row justify-between items-center p-4 bg-gray-800 text-white gap-4">
         {/* Search Bar */}
         <input
           type="text"
           placeholder="Search movie"
-          className="p-2 bg-gray-700 rounded-md outline-none w-1/8"
+          className="p-2 bg-gray-700 rounded-md outline-none w-full md:w-1/4"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -218,7 +218,7 @@ const WatchList = () => {
         {/* Rating Dropdown */}
         <select
           onChange={(e) => handleSort(e.target.value)}
-          className="p-2 bg-gray-700 rounded-md"
+          className="p-2 bg-gray-700 rounded-md w-full md:w-auto"
         >
           <option value="">Sort by Ratings</option>
           <option value="asc">Low to High</option>
@@ -227,14 +227,14 @@ const WatchList = () => {
       </div>
 
       {/* Movies Table */}
-      <div className="m-8">
+      <div className="m-8 overflow-x-auto">
         <table className="w-full text-center border border-gray-700">
           <thead className="bg-gray-700 text-white">
             <tr>
-              <th className="px-6 py-4 text-left">Name</th>
+              <th className="px-2 py-2 md:px-6 md:py-4 text-left">Name</th>
               <th>Ratings</th>
-              <th>Popularity</th>
-              <th>Genre</th>
+              <th className="hidden md:table-cell">Popularity</th>
+              <th className="hidden md:table-cell">Genre</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -245,17 +245,17 @@ const WatchList = () => {
               )
               .map((movie) => (
                 <tr key={movie.id} className="border-b border-gray-700">
-                  <td className="flex items-center px-4 py-4 text-left">
+                  <td className="flex flex-col md:flex-row items-center px-2 py-2 md:px-4 md:py-4 text-left">
                     <img
-                      className="h-20 w-20 rounded-lg mr-4"
+                      className="h-20 w-20 rounded-lg mr-0 md:mr-4"
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                       alt={movie.title}
                     />
                     {movie.title}
                   </td>
                   <td>{movie.vote_average}</td>
-                  <td>{movie.popularity}</td>
-                  <td>
+                  <td className="hidden md:table-cell">{movie.popularity}</td>
+                  <td className="hidden md:table-cell">
                     {movie.genre_ids
                       .map((id) => genres[id] || "Unknown") // Map genre IDs to names
                       .join(", ")}{" "}

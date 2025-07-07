@@ -1,30 +1,33 @@
-
-
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-
-const MovieContext = createContext();
-
-const API_KEY = import.meta.env.VITE_API_KEY;
 import { useDispatch } from "react-redux";
 import {
   hideLoading,
   showLoading,
 } from "../Components/LoaderSlice/loadingSlice";
 
+const MovieContext = createContext();
+
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState("trending/movie/day");
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchMovies = async () => {
+      // Don't fetch if the category isn't set yet
+      if (!category) return;
+
       try {
-        dispatch(showLoading);
+        dispatch(showLoading()); // Correct: Call the action creator
+        console.log("ATTEMPTING TO FETCH WITH CATEGORY:", `'${category}'`);
         const response = await axios.get(
           `https://api.themoviedb.org/3/${category}?api_key=${API_KEY}&page=${page}`
         );
+        console.log("the response is ", response);
 
         setMovies((prevMovies) =>
           page === 1
@@ -34,24 +37,21 @@ export const MovieProvider = ({ children }) => {
       } catch (error) {
         console.error("Error fetching data", error);
       } finally {
-        dispatch(hideLoading);
+        dispatch(hideLoading()); // Correct: Call the action creator
       }
     };
 
     fetchMovies();
-  }, [category, page]);
-
-  // Fetch movies when page or category changes
+  }, [category, page, dispatch]); // Added dispatch to dependency array
 
   const loadMore = () => {
-    setPage((prev) => prev + 1);
+    setPage((prevPage) => prevPage + 1);
   };
-  useEffect(() => {
-    setMovies([]); //Reset movies when category changes
-    setPage(1); // Reset to first page when category changes
-  }, [category]);
+
   return (
-    <MovieContext.Provider value={{ movies, setPage, setCategory, loadMore }}>
+    <MovieContext.Provider
+      value={{ movies, page, setPage, category, setCategory, loadMore }}
+    >
       {children}
     </MovieContext.Provider>
   );

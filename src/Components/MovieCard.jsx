@@ -43,11 +43,13 @@ const MovieCard = ({
       {/* Movie Image */}
       <div
         className="relative w-full h-[300px]  bg-cover bg-center "
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.poster_path})`,
-        }}
         onClick={handleCardClick}
       >
+        <img
+          src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+          loading="lazy" // load lazy
+          className="w-full h-full object-cover"
+        />
         {/* Options button */}
         <div
           className="absolute top-2 right-2 p-2 bg-gray-800 bg-opacity-60 rounded-full cursor-pointer"

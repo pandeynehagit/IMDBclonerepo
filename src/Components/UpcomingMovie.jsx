@@ -1,31 +1,17 @@
 import React, { useEffect, useState } from "react";
 const VITE_API_KEY = import.meta.env.VITE_API_KEY;
-const API_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${VITE_API_KEY}&language=en-US&page=1`;
- import { useContext } from "react";
+// const API_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${VITE_API_KEY}&language=en-US&page=1`;
+import { useContext } from "react";
+import MovieContext from "../Context/MovieContext";
 
 const UpcomingMovies = () => {
-  
-  const [movies, setMovies] = useState([]);
+  const { movies, setPage, setCategory, loadMore } = useContext(MovieContext);
+  // const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [trailerKey, setTrailerKey] = useState("");
 
   useEffect(() => {
-    const fetchUpcomingMovies = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        
-        setMovies(data.results);
-        if (data.results.length > 0) {
-          setSelectedMovie(data.results[0]); // Default to first movie
-          fetchTrailer(data.results[0].id);
-        }
-      } catch (error) {
-        console.error("Error fetching movies:", error);
-      }
-    };
-
-    fetchUpcomingMovies();
+    setCategory("movie/upcoming"); // Tell Context to fetch Popular Movies
   }, []);
 
   const fetchTrailer = async (movieId) => {

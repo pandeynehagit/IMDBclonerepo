@@ -231,7 +231,7 @@ const WatchList = () => {
         <table className="w-full text-center border border-gray-700">
           <thead className="bg-gray-700 text-white">
             <tr>
-              <th className="px-2 py-2 md:px-6 md:py-4 text-left">Name</th>
+              <th className="px-4 py-2 md:px-6 md:py-4 text-left">Name</th>
               <th>Ratings</th>
               <th className="hidden md:table-cell">Popularity</th>
               <th className="hidden md:table-cell">Genre</th>

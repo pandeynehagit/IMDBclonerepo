@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import MovieContext from "../Context/MovieContext";
+import LoadingSpinner from "../Utils/LoadingSpinner";
+import { useSelector } from "react-redux";
 
 const PopularMovies = () => {
   const { movies, setPage, setCategory, loadMore } = useContext(MovieContext);
-
+  const isloading = useSelector((state) => state.loading.isLoading);
   useEffect(() => {
     setCategory("movie/popular"); // Tell Context to fetch Popular Movies
   }, []);
@@ -30,9 +32,17 @@ const PopularMovies = () => {
           </div>
         ))}
       </div>
-
-      <div className="flex justify-center mt-4">
-        <button onClick={loadMore}>Load More</button>
+      <div className="flex justify-center pt-6 pb-6">
+        {isloading ? (
+          <LoadingSpinner />
+        ) : (
+          <button
+            onClick={loadMore}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-300"
+          >
+            Load More
+          </button>
+        )}
       </div>
     </div>
   );

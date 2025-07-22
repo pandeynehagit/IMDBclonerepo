@@ -1,16 +1,5 @@
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center">
-    {/* // //    <svg width="50" height="50" viewBox="0 0 50 50" className="animate-spin">
-//       <circle */}
-    {/* //         cx="25"
-//         cy="25"
-//         r="20"
-//         fill="none"
-//         stroke="blue"
-//         strokeWidth="4"
-//         strokeDasharray="100 100"
-//       />
-//     </svg> */}
     <svg
       className="w-10 h-10 animate-spin"
       viewBox="0 0 50 50"

@@ -1,8 +1,26 @@
-# React + Vite
+# IMDB Clone – Movie Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based app that lets users search movies using the OMDb API with suggestions and favorites using LocalStorage.
 
-Currently, two official plugins are available:
+## 🔍 Features
+- Live search with suggestions
+- Movie details page
+- Save/remove favorites
+- Responsive UI
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧰 Built With
+- React.js
+- TMDb API
+- LocalStorage
+- CSS / Bootstrap
+
+## 🚀 Getting Started
+### Prerequisites
+- Node.js installed
+
+### Installation
+```bash
+git clone ...
+cd IMDB-clone
+npm install
+npm start
